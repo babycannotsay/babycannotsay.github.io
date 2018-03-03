@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>【Markdown】学习笔记 · OnePiece</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        height: 50vh;
+        overflow: hidden;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.7);
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180228 as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180228 media="(max-width: 980px)"/>
+    <link rel="icon" href= /assets/favicon.ico>
+    <script>
+  // load webfont-loader async, and add callback function
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+  
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+      if (postIntroTags) {
+        postIntroTags.classList.add('post-fade-in');
+      }
+      if (postIntroMeat) {
+        postIntroMeat.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
+</script>
+    <script>
+        (function (w) {
+            "use strict";
+            // rel=preload support test
+            if (!w.loadCSS) {
+                w.loadCSS = function () { };
+            }
+            // define on the loadCSS obj
+            var rp = loadCSS.relpreload = {};
+            // rel=preload feature support test
+            // runs once and returns a function for compat purposes
+            rp.support = (function () {
+                var ret;
+                try {
+                    ret = w.document.createElement("link").relList.supports("preload");
+                } catch (e) {
+                    ret = false;
+                }
+                return function () {
+                    return ret;
+                };
+            })();
+
+            // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+            // then change that media back to its intended value on load
+            rp.bindMediaToggle = function (link) {
+                // remember existing media attr for ultimate state, or default to 'all'
+                var finalMedia = link.media || "all";
+
+                function enableStylesheet() {
+                    link.media = finalMedia;
+                }
+
+                // bind load handlers to enable media
+                if (link.addEventListener) {
+                    link.addEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.attachEvent("onload", enableStylesheet);
+                }
+
+                // Set rel and non-applicable media type to start an async request
+                // note: timeout allows this to happen async to let rendering continue in IE
+                setTimeout(function () {
+                    link.rel = "stylesheet";
+                    link.media = "only x";
+                });
+                // also enable media after 3 seconds,
+                // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                setTimeout(enableStylesheet, 3000);
+            };
+
+            // loop through link elements in DOM
+            rp.poly = function () {
+                // double check this to prevent external calls from running
+                if (rp.support()) {
+                    return;
+                }
+                var links = w.document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    // qualify links to those with rel=preload and as=style attrs
+                    if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                        // prevent rerunning on link
+                        link.setAttribute("data-loadcss", true);
+                        // bind listeners to toggle media back
+                        rp.bindMediaToggle(link);
+                    }
+                }
+            };
+
+            // if unsupported, run the polyfill
+            if (!rp.support()) {
+                // run once at least
+                rp.poly();
+
+                // rerun poly on an interval until onload
+                var run = w.setInterval(rp.poly, 500);
+                if (w.addEventListener) {
+                    w.addEventListener("load", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                } else if (w.attachEvent) {
+                    w.attachEvent("onload", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                }
+            }
+            // commonjs
+            if (typeof exports !== "undefined") {
+                exports.loadCSS = loadCSS;
+            }
+            else {
+                w.loadCSS = loadCSS;
+            }
+        }(typeof global !== "undefined" ? global : this));
+    </script>
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >OnePiece</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">【Markdown】学习笔记</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>OnePiece</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            【Markdown】学习笔记
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/02/09</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p><em>该文记录学习Markdown的学习过程，并附带一些Markdown相关的资源。</em><br><a id="more"></a></p>
+<h1 id="块级元素"><a href="#块级元素" class="headerlink" title="块级元素"></a>块级元素</h1><h2 id="段落和换行"><a href="#段落和换行" class="headerlink" title="段落和换行"></a>段落和换行</h2><p>文本字段与文本字段间若没有空行，如:</p>
+<p>你好<br>中国</p>
+<p>会生成: <code>&lt;p&gt;你好&lt;br /&gt;中国&lt;/p&gt;</code></p>
+<!--more-->
+<p>如若存在空行，如:</p>
+<p>你好</p>
+<p>中国</p>
+<p>会生成: <code>&lt;p&gt;你好&lt;/p&gt;&lt;p&gt;中国&lt;/p&gt;</code></p>
+<p>段落与其他段落之间需有一个以上的空行，以使其不被上一级的段落影响。</p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><h3 id="Setext样式"><a href="#Setext样式" class="headerlink" title="Setext样式"></a>Setext样式</h3><h3 id="Atx样式"><a href="#Atx样式" class="headerlink" title="Atx样式"></a>Atx样式</h3><p>标题开头使用1-6个#与至少一个空格，对应1-6级标题。</p>
+<p>如: <code># 一级标题</code>     <code>### 三级标题</code></p>
+<h2 id="块引用"><a href="#块引用" class="headerlink" title="块引用"></a>块引用</h2><p>块引用需在每行的前面加上&gt;，也可只在整个段落的第一行最前面加上&gt;。</p>
+<p>可以通过在已有的块引用中加&gt;，达到块引用嵌套的效果。</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>无序列表使用星号*，加号+和连字号-，这些符号可以互换，符号与正文字段间至少需要一个空格或制表符。</p>
+<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表使用数字接一个英文句点，句点与正文字段间至少需要一个空格或制表符，可以不用在意数字的正确性。</p>
+<h3 id="共同点"><a href="#共同点" class="headerlink" title="共同点"></a>共同点</h3><p>如果列表项目之间用空行分开，输出成HTML时，会用</p><p>将项目内容包裹起来。如:</p>
+<p> <code>- hello</code><br> <code>- world</code></p>
+<p>会生成: <code>&lt;ul&gt;&lt;li&gt;hello&lt;/li&gt;&lt;li&gt;world&lt;/li&gt;&lt;/ul&gt;</code></p>
+<p>而</p>
+<p> <code>- hello</code></p>
+<p> <code>- world</code></p>
+<p>会生成: <code>&lt;ul&gt;&lt;li&gt;&lt;p&gt;hello&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;world&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</code></p>
+<p><em>列表项目中可以包含多个段落</em>，每个项目下的段落都必须缩进4个空格或是1个制表符。<br>如果要在列表项目内放进<em>引用</em>，那&gt;也需要按照以上缩进。<br>如果要放<em>代码块</em>的话，代码块需要缩进2次，即缩进8个空格或2个制表符</p>
+<p>在不需要数字列表项的时候，需要避免行首避免出现<strong>数字句点空白</strong>的情况。这种情况下，可以在句点前面加\转义</p>
+<p>若项目列表前掺杂了各种无序列表或者有序列表的符号，会以列表的第一个来生成无序或者有序列表。如:</p>
+<p><code>1. hello</code><br><code>- world</code></p>
+<p>会生成</p>
+<ol>
+<li>hello</li>
+<li>world</li>
+</ol>
+<p>在列表符号后输入至少一个空格以实现，列表间的嵌套。如:</p>
+<pre><code>- ni
+1. hao
+ - ma
+</code></pre><p>会生成</p>
+<ul>
+<li>ni</li>
+</ul>
+<ol>
+<li>hao<ul>
+<li>ma</li>
+</ul>
+</li>
+</ol>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p>代码块即输进去什么，输出来还是什么。（除了一些特殊字符，如&amp;，&lt;，&gt;等）</p>
+<p>建立代码块，只要在行首缩进4个空格或1个制表符即可。如:</p>
+<pre><code>这是一个普通段落
+    这是一个代码块
+</code></pre><p>会生成: </p>
+<pre><code>&lt;p&gt;这是一个普通段落:  &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;这是一个代码区块。&lt;/code&gt;&lt;/pre&gt;
+</code></pre><p>在代码块里，&amp; 、 &lt; 和 &gt; 会自动转成 HTML 实体。<br>如:  </p>
+<pre><code>&lt;div class=&quot;footer&quot;&gt;
+    &amp;copy; 2004 Foo Corporation
+&lt;/div&gt;
+</code></pre><p>会生成:</p>
+<pre><code>&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&quot;footer&quot;&amp;gt;
+    &amp;amp;copy; 2004 Foo Corporation
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre><h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><p>可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线:  </p>
+<pre><code>* * *
+
+***
+
+*****
+
+- - -
+
+---------------------------------------
+</code></pre><h1 id="内联元素"><a href="#内联元素" class="headerlink" title="内联元素"></a>内联元素</h1><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><h3 id="共同点-1"><a href="#共同点-1" class="headerlink" title="共同点"></a>共同点</h3><p>链接文字用[方括号]来标记，如:  [我是链接的提示文字]</p>
+<h3 id="行内式"><a href="#行内式" class="headerlink" title="行内式"></a>行内式</h3><p>行内式链接要在方括号后面紧跟圆括号并插入网址链接。若在网址后面，用双引号引用一段文字，则该文字是链接文字的title。</p>
+<p>如: <code>[百度点我](https://www.baidu.com/ &quot;百度一下，你就知道&quot;)，我是打酱油的。</code></p>
+<p>会生成 <code>&lt;p&gt;&lt;a href=&quot;https://www.baidu.com/&quot; title=&quot;百度一下，你就知道&quot;&gt;百度点我&lt;/a&gt;， 我是打酱油的。&lt;/p&gt;</code></p>
+<p>链接到相对路径如下:  </p>
+<p><code>skin to [relative](/relative/)</code></p>
+<h3 id="参考式"><a href="#参考式" class="headerlink" title="参考式"></a>参考式</h3><p>参考式的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记:  </p>
+<pre><code>This is [an example][id] reference-style link.
+</code></pre><p>接着，在文件的任意处，你可以把这个标记的链接内容定义出来:  </p>
+<pre><code>[id]: http://example.com/  &quot;Optional Title Here&quot;
+</code></pre><p>链接内容定义的形式为:  </p>
+<pre><code>方括号（前面可以选择性地加上至多三个空格来缩进），里面输入链接文字
+接着一个冒号
+接着一个以上的空格或制表符
+接着链接的网址
+选择性地接着 title 内容，可以用单引号、双引号或是括弧包着
+</code></pre><p>网址定义只有在产生链接的时候用到，并不会直接出现在文件之中。</p>
+<p>链接辨别标签可以有字母、数字、空白和标点符号，但是不区分大小写。</p>
+<p>隐式链接标记功能让你可以省略指定链接标记，这种情形下，链接标记会视为等同于链接文字，要用隐式链接标记只要在链接文字后面加上一个空的方括号。</p>
+<h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><p>使用<em>或者_包围一段文字。一个</em>或_则文字为斜体，两个则为强调，三个则为斜体+强调。</p>
+<p>但如果 * 和 _ 两边都有空白的话，它们就只会被当成普通的符号。如:  </p>
+<pre><code>*hello *
+</code></pre><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>若要输出代码片段，需要将其包裹在重音符号(`)内。</p>
+<p>如: <code>use the `printf()` function.</code></p>
+<p>会生成: <code>&lt;p&gt;use the &lt;code&gt;printf()&lt;/code&gt; function.&lt;/p&gt;</code> </p>
+<p>要在代码片段中包含字面量的重音符号，可以使用多个重音符号作为起始和结束标志，</p>
+<p>如: <code>``这是一个重音字符(`).``</code></p>
+<p>会生成: <code>&lt;p&gt;&lt;code&gt;这是一个重音字符(`).&lt;/code&gt;&lt;/p&gt;</code></p>
+<p>注: 起始和结束的重音符号须比字面量的连续重音符号个数多，如其中若有2个重音符号<code>``</code>，则起始和结束的重音符必须大于等于3.</p>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><h3 id="行内式-1"><a href="#行内式-1" class="headerlink" title="行内式"></a>行内式</h3><p>行内式的图片语法看起来像是:  </p>
+<pre><code>![Alt text](/path/to/img.jpg)
+
+![Alt text](/path/to/img.jpg &quot;Optional title&quot;)
+</code></pre><p>详细叙述如下:  </p>
+<pre><code>一个惊叹号 !
+接着一个方括号，里面放上图片的替代文字
+接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上 选择性的 &apos;title&apos; 文字。
+</code></pre><h3 id="参考式-1"><a href="#参考式-1" class="headerlink" title="参考式"></a>参考式</h3><p>参考式的图片语法则长得像这样:  </p>
+<pre><code>![Alt text][id]
+</code></pre><p>「id」是图片参考的名称，图片参考的定义方式则和连结参考一样:  </p>
+<pre><code>[id]: url/to/image  &quot;Optional title attribute&quot;
+</code></pre><p>到目前为止， Markdown 还没有办法指定图片的宽高，如果你需要的话，你可以使用普通的 <img> 标签。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="自动链接"><a href="#自动链接" class="headerlink" title="自动链接"></a>自动链接</h2><p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只要是用尖括号包起来， Markdown 就会自动把它转成链接。一般网址的链接文字就和链接地址一样，例如:  </p>
+<pre><code>&lt;http://example.com/&gt;
+</code></pre><p>Markdown 会转为:  </p>
+<pre><code>&lt;a href=&quot;http://example.com/&quot;&gt;http://example.com/&lt;/a&gt;
+</code></pre><h2 id="反斜杠转义"><a href="#反斜杠转义" class="headerlink" title="反斜杠转义"></a>反斜杠转义</h2><p>Markdown为下面字符提供反斜杠转义:  </p>
+<pre><code>\   反斜线
+`   反引号
+*   星号
+_   底线
+{}  花括号
+[]  方括号
+()  括弧
+#   井字号
++   加号
+-   减号
+.   英文句点
+!   惊叹号
+</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Markdown中文文档链接:  <a href="http://markdown-zh.readthedocs.io/en/latest/" target="_blank" rel="noopener">http://markdown-zh.readthedocs.io/en/latest/</a></p>
+<h1 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h1><p>在线Markdown编辑器:  <a href="https://stackedit.io/editor" target="_blank" rel="noopener">https://stackedit.io/editor</a></p>
+<p>Windows推荐用Markdown编辑器:  <a href="https://markdownpad.com/download.html" title="MarkdownPad2" target="_blank" rel="noopener">MarkdownPad2</a></p>
+<p>MarkdownPad2注册码:  <a href="http://www.jianshu.com/p/9e5cd946696d" target="_blank" rel="noopener">http://www.jianshu.com/p/9e5cd946696d</a>，<strong>感谢作者分享</strong>。</p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/Git学习笔记/" title= 【Git】学习笔记 >
+                    <div class="nextTitle">【Git】学习笔记</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/Hexo学习笔记/" title= 【Hexo】学习笔记 >
+                    <div class="prevTitle">【Hexo】学习笔记</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:fuwanqun@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//www.github.com/babycannotsay" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/avatar/wechatQR.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#块级元素"><span class="toc-number">1.</span> <span class="toc-text">块级元素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#段落和换行"><span class="toc-number">1.1.</span> <span class="toc-text">段落和换行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标题"><span class="toc-number">1.2.</span> <span class="toc-text">标题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Setext样式"><span class="toc-number">1.2.1.</span> <span class="toc-text">Setext样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Atx样式"><span class="toc-number">1.2.2.</span> <span class="toc-text">Atx样式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#块引用"><span class="toc-number">1.3.</span> <span class="toc-text">块引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-number">1.4.</span> <span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#无序列表"><span class="toc-number">1.4.1.</span> <span class="toc-text">无序列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序列表"><span class="toc-number">1.4.2.</span> <span class="toc-text">有序列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共同点"><span class="toc-number">1.4.3.</span> <span class="toc-text">共同点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码块"><span class="toc-number">1.5.</span> <span class="toc-text">代码块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分割线"><span class="toc-number">1.6.</span> <span class="toc-text">分割线</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内联元素"><span class="toc-number">2.</span> <span class="toc-text">内联元素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#链接"><span class="toc-number">2.1.</span> <span class="toc-text">链接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#共同点-1"><span class="toc-number">2.1.1.</span> <span class="toc-text">共同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#行内式"><span class="toc-number">2.1.2.</span> <span class="toc-text">行内式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考式"><span class="toc-number">2.1.3.</span> <span class="toc-text">参考式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强调"><span class="toc-number">2.2.</span> <span class="toc-text">强调</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">2.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片"><span class="toc-number">2.4.</span> <span class="toc-text">图片</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#行内式-1"><span class="toc-number">2.4.1.</span> <span class="toc-text">行内式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考式-1"><span class="toc-number">2.4.2.</span> <span class="toc-text">参考式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number">3.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#自动链接"><span class="toc-number">3.1.</span> <span class="toc-text">自动链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反斜杠转义"><span class="toc-number">3.2.</span> <span class="toc-text">反斜杠转义</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#相关资源"><span class="toc-number">5.</span> <span class="toc-text">相关资源</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 21 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/19</span><a class="archive-post-title" href= "/pc项目技术总结/" >【总结】pc项目技术总结</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/16</span><a class="archive-post-title" href= "/Nightmare中文/" >【测试框架】Nightmare中文版</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/Array方法中回调函数不执行的理解/" >【JavaScript】Array方法中回调函数不执行的理解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/02</span><a class="archive-post-title" href= "/Angular之指令scope中属性/" >【Angular】指令scope中的属性=?</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/17</span><a class="archive-post-title" href= "/ramda之函数使用场景/" >【ramda】函数redux假想使用场景</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/Angular之ng-if与ng-repeat包裹的元素作用域/" >【Angular】ng-if与ng-repeat包裹的元素作用域</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/Angular之-parse即时修改ng-model值/" >【Angular】$parse即时修改ng-model值</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/14</span><a class="archive-post-title" href= "/Angular之基于ng-repeat，使用自定义指令给子元素添加属性的问题/" >【Angular】基于ng-repeat，使用自定义指令给子元素添加属性的问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/22</span><a class="archive-post-title" href= "/Array之好记性不如烂笔头/" >【JavaScript】好记性不如烂笔头</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/21</span><a class="archive-post-title" href= "/数组之功能函数/" >【JavaScript】数组之功能函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/非Array调用Array原型链上的方法/" >【JavaScript】非Array调用Array原型链上的方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/15</span><a class="archive-post-title" href= "/多个img标签的间距问题/" >【HTML】多个img标签的间距问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/15</span><a class="archive-post-title" href= "/IDEA学习笔记/" >【IDEA】学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/平时所遇凌杂问题汇总‘/" >【杂】平时所遇凌杂问题汇总(持续更新)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/JS之各种top-left/" >【JavaScript】各种top&&left</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/JS之各种x-y/" >【JavaScript】各种x&&y</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/JS之各种height-width/" >【JavaScript】各种height&&width</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/Git学习笔记/" >【Git】学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/linux基本命令/" >【linux】基本命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/Hexo学习笔记/" >【Hexo】学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/Markdown学习笔记/" >【Markdown】学习笔记</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Angular"><span class="iconfont-archer">&#xe60a;</span>Angular</span>
+    
+        <span class="sidebar-category-name" data-categories="JavaScript"><span class="iconfont-archer">&#xe60a;</span>JavaScript</span>
+    
+        <span class="sidebar-category-name" data-categories="一劳永逸"><span class="iconfont-archer">&#xe60a;</span>一劳永逸</span>
+    
+        <span class="sidebar-category-name" data-categories="HTML"><span class="iconfont-archer">&#xe60a;</span>HTML</span>
+    
+        <span class="sidebar-category-name" data-categories="杂杂杂"><span class="iconfont-archer">&#xe60a;</span>杂杂杂</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: '傅万群'
+    }
+</script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+    </body>
+</html>
+
+
