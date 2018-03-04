@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>【杂】平时所遇凌杂问题汇总(持续更新) · OnePiece</title>
+    <title>【Webpack】webpack 4.x学习笔记 · OnePiece</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -265,7 +265,7 @@
                 <a href="/" >OnePiece</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">【杂】平时所遇凌杂问题汇总(持续更新)</a>
+                <a href="#" class="post-name">【Webpack】webpack 4.x学习笔记</a>
             </div>
     </div>
     
@@ -286,7 +286,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            【杂】平时所遇凌杂问题汇总(持续更新)
+            【Webpack】webpack 4.x学习笔记
             <!-- 404 -->
             
         </h1>
@@ -304,7 +304,7 @@
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/02/12</span>
+                <span class="post-intro-time">2018/03/04</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -333,31 +333,62 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p><em>为了避免在日后碰到相同的问题时，再三搜索，特记录平时问题的解决之法。</em><br><a id="more"></a></p>
-<h3 id="以下所列均为亲测有效之法，来自广大网友的亲情奉献。以此记录以便日后不时之需。感谢网友们的无私奉献。"><a href="#以下所列均为亲测有效之法，来自广大网友的亲情奉献。以此记录以便日后不时之需。感谢网友们的无私奉献。" class="headerlink" title="以下所列均为亲测有效之法，来自广大网友的亲情奉献。以此记录以便日后不时之需。感谢网友们的无私奉献。"></a>以下所列均为亲测有效之法，来自广大网友的亲情奉献。以此记录以便日后不时之需。感谢网友们的无私奉献。</h3><ul>
-<li><a href="http://jingyan.baidu.com/article/4dc40848a28adec8d946f11b.html" target="_blank" rel="noopener">重装系统win7旗舰版详细教程及下载</a></li>
-<li><a href="http://blog.csdn.net/zhangwenwu2/article/details/52778521" target="_blank" rel="noopener">npm用法以及更换到淘宝镜像的方法 </a></li>
-<li><p><a href="http://blog.sina.com.cn/s/blog_8627ac3c010195ri.html" target="_blank" rel="noopener">如何手工去除http://www.2345.com/?kunown恶意链接！</a></p>
-<p> 该链接中WMITool链接已经失效，奉上无毒有效的WMITool来源:<a href="http://pan.baidu.com/s/1slliN2d" target="_blank" rel="noopener">http://pan.baidu.com/s/1slliN2d</a>。为防不测，网友下载后可以先查毒。如若该链接日后失效，请网友发我邮箱告知,<a href="mailto:***335658202@qq.com" target="_blank" rel="noopener">***335658202@qq.com</a>***。</p>
-</li>
-</ul>
+        <h2 id="html-webpack-plugin"><a href="#html-webpack-plugin" class="headerlink" title="html-webpack-plugin"></a><a href="https://doc.webpack-china.org/guides/output-management/#设定-htmlwebpackplugin" target="_blank" rel="noopener">html-webpack-plugin</a></h2><blockquote>
+<p>如果我们更改了我们的一个入口起点的名称，甚至添加了一个新的名称，生成的包将被重命名在一个构建中，但是我们的index.html文件仍然会引用旧的名字。我们用 HtmlWebpackPlugin 来解决这个问题。</p>
+</blockquote>
+<blockquote>
+<p><a href="https://doc.webpack-china.org/plugins/html-webpack-plugin" target="_blank" rel="noopener">html-webpack-plugin</a>简化了HTML文件的创建，以便为你的webpack包提供服务。这对于在文件名中包含每次会随着编译而发生变化哈希的 webpack bundle 尤其有用。 你可以让插件为你生成一个HTML文件，使用lodash模板提供你自己的模板，或使用你自己的<a href="https://doc.webpack-china.org/loaders" target="_blank" rel="noopener">loader</a>。</p>
+</blockquote>
+<h2 id="clean-webpack-plugin"><a href="#clean-webpack-plugin" class="headerlink" title="clean-webpack-plugin"></a><a href="https://doc.webpack-china.org/guides/output-management/#清理-dist-文件夹" target="_blank" rel="noopener">clean-webpack-plugin</a></h2><p><a href="https://github.com/johnagan/clean-webpack-plugin" target="_blank" rel="noopener">clean-webpack-plugin</a> 会在每次构建前清理 /dist 文件夹</p>
+<p><code>new CleanWebpackPlugin([&#39;dist&#39;])</code></p>
+<h2 id="webpack-dev-server"><a href="#webpack-dev-server" class="headerlink" title="webpack-dev-server"></a><a href="https://doc.webpack-china.org/guides/development/#使用-webpack-dev-server" target="_blank" rel="noopener">webpack-dev-server</a></h2><blockquote>
+<p><a href="https://github.com/webpack/webpack-dev-server" target="_blank" rel="noopener">webpack-dev-server</a> 提供了一个简单的 web 服务器，并且能够实时重新加载(live reloading)</p>
+</blockquote>
+<h2 id="uglifyjs-webpack-plugin"><a href="#uglifyjs-webpack-plugin" class="headerlink" title="uglifyjs-webpack-plugin"></a><a href="https://doc.webpack-china.org/guides/tree-shaking/#精简输出" target="_blank" rel="noopener">uglifyjs-webpack-plugin</a></h2><blockquote>
+<p>我们已经通过 import and export 语法，标识出了那些“未引用代码(dead code)”，但是我们仍然需要从 bundle 中删除它们。要做到这一点，我们将添加一个能够删除未引用代码(dead code)的压缩工具(minifier)——<a href="https://github.com/webpack-contrib/uglifyjs-webpack-plugin" target="_blank" rel="noopener">uglifyjs-webpack-plugin</a></p>
+</blockquote>
+<h2 id="CommonsChunkPlugin"><a href="#CommonsChunkPlugin" class="headerlink" title="CommonsChunkPlugin"></a><a href="https://doc.webpack-china.org/guides/code-splitting/#防止重复-prevent-duplication-" target="_blank" rel="noopener">CommonsChunkPlugin</a></h2><blockquote>
+<p><a href="https://doc.webpack-china.org/plugins/commons-chunk-plugin" target="_blank" rel="noopener">CommonsChunkPlugin</a> 插件可以将公共的依赖模块提取到已有的入口 chunk 中，或者提取到一个新生成的 chunk</p>
+</blockquote>
+<h2 id="ExtractTextPlugin"><a href="#ExtractTextPlugin" class="headerlink" title="ExtractTextPlugin"></a><a href="https://doc.webpack-china.org/plugins/extract-text-webpack-plugin" target="_blank" rel="noopener">ExtractTextPlugin</a></h2><blockquote>
+<p>用于将 CSS 从主应用程序中分离</p>
+</blockquote>
+<h2 id="bundle-loader"><a href="#bundle-loader" class="headerlink" title="bundle-loader"></a><a href="https://doc.webpack-china.org/loaders/bundle-loader" target="_blank" rel="noopener">bundle-loader</a></h2><blockquote>
+<p>用于分离代码和延迟加载生成的 bundle</p>
+</blockquote>
+<h2 id="promise-loader"><a href="#promise-loader" class="headerlink" title="promise-loader"></a><a href="https://github.com/gaearon/promise-loader" target="_blank" rel="noopener">promise-loader</a></h2><blockquote>
+<p>类似于 bundle-loader ，但是使用的是 promises</p>
+</blockquote>
+<h2 id="动态导入"><a href="#动态导入" class="headerlink" title="动态导入"></a><a href="https://doc.webpack-china.org/guides/code-splitting/#动态导入-dynamic-imports-" target="_blank" rel="noopener">动态导入</a></h2><h2 id="bundle-分析"><a href="#bundle-分析" class="headerlink" title="bundle 分析"></a><a href="">bundle 分析</a></h2><blockquote>
+<p><a href="https://alexkuz.github.io/webpack-chart/" target="_blank" rel="noopener">webpack-chart</a>: webpack 数据交互饼图。</p>
+</blockquote>
+<blockquote>
+<p><a href="https://chrisbateman.github.io/webpack-visualizer/" target="_blank" rel="noopener">webpack-visualizer</a>: 可视化并分析你的 bundle，检查哪些模块占用空间，哪些可能是重复使用的。</p>
+<p><a href="https://github.com/webpack-contrib/webpack-bundle-analyzer" target="_blank" rel="noopener">webpack-bundle-analyzer</a>: 一款分析 bundle 内容的插件及 CLI 工具，以便捷的、交互式、可缩放的树状图形式展现给用户。</p>
+</blockquote>
+<h2 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a><a href="https://doc.webpack-china.org/guides/lazy-loading/" target="_blank" rel="noopener">懒加载</a></h2><h2 id="提取模板"><a href="#提取模板" class="headerlink" title="提取模板"></a><a href="https://doc.webpack-china.org/guides/caching/#提取模板-extracting-boilerplate-" target="_blank" rel="noopener">提取模板</a></h2><blockquote>
+<p><a href="https://doc.webpack-china.org/plugins/commons-chunk-plugin" target="_blank" rel="noopener">CommonsChunkPlugin</a>: 删除了常用的 CommonsChunkPlugin。对于那些需要细粒度控制缓存策略的人，可以通过optimization.splitChunks和 optimization.runtimeChunk。 现在可以使用 module.rules[].resolve来配置解析。它与全局配置合并。</p>
+<p><a href="https://www.imooc.com/qadetail/251317?t=404352" target="_blank" rel="noopener">配置 new webpack.optimize.CommonsChunkPlugin({ name: ‘vendor’ })这个之后,执行npm run build,出现报错.</a></p>
+<p><a href="http://blog.csdn.net/songluyi/article/details/79419118" target="_blank" rel="noopener">没有了CommonsChunkPlugin，咱拿什么来分包</a> </p>
+</blockquote>
+<h2 id="模块标识符"><a href="#模块标识符" class="headerlink" title="模块标识符"></a><a href="https://doc.webpack-china.org/guides/caching/#模块标识符-module-identifiers-" target="_blank" rel="noopener">模块标识符</a></h2><blockquote>
+<p>vendor bundle 会随着自身的 module.id 的修改，而发生变化。</p>
+</blockquote>
+<blockquote>
+<p><a href="https://doc.webpack-china.org/plugins/hashed-module-ids-plugin" target="_blank" rel="noopener">HashedModuleIdsPlugin</a>: 该插件会根据模块的相对路径生成一个四位数的hash作为模块id, 建议用于生产环境。</p>
+</blockquote>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/IDEA学习笔记/" title= 【IDEA】学习笔记 >
-                    <div class="nextTitle">【IDEA】学习笔记</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/JS之各种top-left/" title= 【JavaScript】各种top&&left >
-                    <div class="prevTitle">【JavaScript】各种top&&left</div>
+                <a href= "/pc项目技术总结/" title= 【总结】pc项目技术总结 >
+                    <div class="prevTitle">【总结】pc项目技术总结</div>
                 </a>
             
         </li>
@@ -452,7 +483,7 @@
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#以下所列均为亲测有效之法，来自广大网友的亲情奉献。以此记录以便日后不时之需。感谢网友们的无私奉献。"><span class="toc-number">1.</span> <span class="toc-text">以下所列均为亲测有效之法，来自广大网友的亲情奉献。以此记录以便日后不时之需。感谢网友们的无私奉献。</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#html-webpack-plugin"><span class="toc-number">1.</span> <span class="toc-text">html-webpack-plugin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#clean-webpack-plugin"><span class="toc-number">2.</span> <span class="toc-text">clean-webpack-plugin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack-dev-server"><span class="toc-number">3.</span> <span class="toc-text">webpack-dev-server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#uglifyjs-webpack-plugin"><span class="toc-number">4.</span> <span class="toc-text">uglifyjs-webpack-plugin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonsChunkPlugin"><span class="toc-number">5.</span> <span class="toc-text">CommonsChunkPlugin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ExtractTextPlugin"><span class="toc-number">6.</span> <span class="toc-text">ExtractTextPlugin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bundle-loader"><span class="toc-number">7.</span> <span class="toc-text">bundle-loader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#promise-loader"><span class="toc-number">8.</span> <span class="toc-text">promise-loader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态导入"><span class="toc-number">9.</span> <span class="toc-text">动态导入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bundle-分析"><span class="toc-number">10.</span> <span class="toc-text">bundle 分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#懒加载"><span class="toc-number">11.</span> <span class="toc-text">懒加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提取模板"><span class="toc-number">12.</span> <span class="toc-text">提取模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块标识符"><span class="toc-number">13.</span> <span class="toc-text">模块标识符</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

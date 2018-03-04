@@ -290,6 +290,32 @@
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/webpack4/" >
+                
+                    <span>【Webpack】webpack 4.x学习笔记</span>
+            </a>
+            <div class="abstract-content">
+                html-webpack-plugin
+如果我们更改了我们的一个入口起点的名称，甚至添加了一个新的名称，生成的包将被重命名在一个构建中，但是我们的index.html文件仍然会引用旧的名字。我们用 HtmlWebpackPlugin 来解决这个问题。
+
+
+html-webpack-plugin简化了HTML文件的创建，以便为你的webpack包提供服务。这对于在文件名中包含每次会随着编译而发生变化哈希的 webpack bundle 尤其有用。 你可以让插件为你生成一个HTML文件，使用lodash模板提供你自己的模板，或使用你自己的loader。
+
+clean-webpack-plug...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/04</span>
+                </div>
+                <!-- tags  -->
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/pc项目技术总结/" >
                 
                     <span>【总结】pc项目技术总结</span>
@@ -544,34 +570,6 @@ scope.$watch(attr[&apos;ngModel&apos;], () =&gt; {
                 <!-- date  -->
                 <div class="abstract-date">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/02/22</span>
-                </div>
-                <!-- tags  -->
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/数组之功能函数/" >
-                
-                    <span>【JavaScript】数组之功能函数</span>
-            </a>
-            <div class="abstract-content">
-                找出整型数组中乘积最大的三个数思路：对数组进行升序排序后，所求为最小的两个数与最大的数的乘积 或者 最大的三个数的乘积。
-举一反三：找出整型数组中乘积最大的n个数思路：先对数组进行排序，再根据n的数值理清n个数值组合可能存在哪些情况。
-数组去重思路： 
-
-ES6: Array.from(new Set(arr))
-创建一个新数组newArr，根据newArr.indexOf()判断数组中是否存在相应数值，若不存在则push。
-
-
-操作两个二元数组相同位置的值const operateTwoArrIdenticalIndex = (operator, arr1, arr2) =&gt; {...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/02/21</span>
                 </div>
                 <!-- tags  -->
                 
@@ -935,24 +933,7 @@ ES6: Array.from(new Set(arr))
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 21 </div>
+    <div class="total-archive"> Total : 22 </div>
     
     <div class="post-archive">
     
@@ -961,6 +942,11 @@ ES6: Array.from(new Set(arr))
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/04</span><a class="archive-post-title" href= "/webpack4/" >【Webpack】webpack 4.x学习笔记</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1048,12 +1034,12 @@ ES6: Array.from(new Set(arr))
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/JS之各种x-y/" >【JavaScript】各种x&&y</a>
+            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/JS之各种height-width/" >【JavaScript】各种height&&width</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/JS之各种height-width/" >【JavaScript】各种height&&width</a>
+            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/JS之各种x-y/" >【JavaScript】各种x&&y</a>
         </li>
     
     
@@ -1068,12 +1054,12 @@ ES6: Array.from(new Set(arr))
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/Hexo学习笔记/" >【Hexo】学习笔记</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/Markdown学习笔记/" >【Markdown】学习笔记</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/Markdown学习笔记/" >【Markdown】学习笔记</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/Hexo学习笔记/" >【Hexo】学习笔记</a>
         </li>
     
     </div>
@@ -1123,6 +1109,8 @@ jsonContent:
         <span class="sidebar-category-name" data-categories="HTML"><span class="iconfont-archer">&#xe60a;</span>HTML</span>
     
         <span class="sidebar-category-name" data-categories="杂杂杂"><span class="iconfont-archer">&#xe60a;</span>杂杂杂</span>
+    
+        <span class="sidebar-category-name" data-categories="Webpack"><span class="iconfont-archer">&#xe60a;</span>Webpack</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
